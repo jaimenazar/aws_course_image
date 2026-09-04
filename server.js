@@ -35,13 +35,15 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util.js';
     }
 
     const image_url = req.query.image_url
-    
-    const path = await filterImageFromURL(image_url)
-
-    res.status(200).sendFile(path).then(function(){
-      // Delete image after response
-      fs.unlinkSync(path)
-    });
+        
+    try {
+      const path = await filterImageFromURL(image_url);
+      res.sendFile(path, () => {
+        fs.unlink(path, () => {});
+      });
+    } catch (err) {
+      return res.status(422).send("Unable to process image");
+    }
 
   } );
 
