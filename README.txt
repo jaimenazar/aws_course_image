@@ -1,1 +1,1 @@
-Endpoint: http://course-image-dev2.us-east-1.elasticbeanstalk.com/
+Endpoint: http://course-image-dev.us-east-1.elasticbeanstalk.com/
